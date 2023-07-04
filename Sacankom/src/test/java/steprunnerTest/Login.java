@@ -11,7 +11,7 @@ public class Login {
 	String user_name,password;
     loginpage admin;
     public Login() {
-    	admin=new loginpage("Deyaa123","123Deyaa");
+    	admin=new loginpage("adham_12028277","123456789@adham");
     	}
 	
 	@Given("the user_name is {string}")
