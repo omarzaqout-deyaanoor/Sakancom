@@ -21,12 +21,21 @@ public class loginpage {
 	}
 
 	public boolean login(String userName, String password) {
-		this.flag_login = this.username.equals(userName);
-		this.flag_login = this.password.equals(password);
+		if(this.password.equals(password)&&this.username.equals(userName)) {
+			this.flag_login=true;
+		}
+		else {
+			this.flag_login=false;
+		}
+			
 		return this.flag_login;
 	}
 	
 	public boolean isLogged() {
+		return this.flag_login;
+	}
+	public boolean logout() {
+		this.flag_login = false;
 		return this.flag_login;
 	}
 }
