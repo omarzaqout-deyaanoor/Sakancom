@@ -36,8 +36,8 @@ public class Main {
 	
 /////		
 //		
-	loginpage login=new loginpage();
-	login.validateCredentials("ali","123456");
+	loginpage login=new loginpage("omar","321");
+	//login.validateCredentials("ali","123456");
 ///		//login.login("deyaa", "123");
 //		
 ////		
@@ -55,11 +55,23 @@ public class Main {
 	 //    int id =scan.nextInt();
 	 //    admin.req_houses(id);
 	
-	Tenant_avilable_house t=new Tenant_avilable_house();
-	System.out.println(t.is_found());
-	t.Select_houses(login);
+	//Tenant_avilable_house t=new Tenant_avilable_house();
+	//System.out.println(t.is_found());
+	//t.Select_houses(login);
+	login.validateCredentials("omar", "321");
+	/*int bath[]= {1,1,3,4,2};
+	int bed[]= {2,3,2,2,2,2};
+	boolean bal[]= {true,true,true,true};
+	Dashboard dashe=new Dashboard(16, 2, 1, bath, bed, bal);
+	dashe.add(login);*/
+	//tenant_add_furniture tn=new tenant_add_furniture("bag",200);
+//	tn.add_furniture(login);
+	Control_Panel cn=new Control_Panel();
+	cn.Select_houses(login);
+	cn.count_tanents(89);
+	cn.num_floor(88);
 
-	    
+	    	
 	
 	     
 		

@@ -42,6 +42,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/HP/Downloads/mysql-connector-java-8.0.11.jar" sourcepath="C:/Users/OMAR/Downloads/mysql-connector-java-8.0.11-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/OMAR/git/Sakancom/Sacankom/mysql-connector-java-8.0.11.jar" sourcepath="C:/Users/OMAR/Downloads/mysql-connector-java-8.0.11-sources.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

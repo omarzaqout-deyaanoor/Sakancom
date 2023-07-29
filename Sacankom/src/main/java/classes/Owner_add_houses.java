@@ -1,6 +1,7 @@
 package classes;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +15,7 @@ public class Owner_add_houses {
 	protected String available_services_House;
 	protected int price_House;
 	protected String information_contact;
+	protected int id_owner;
 	protected boolean determine_unit_availability_House;
 	protected boolean add;
     private static final Logger logger = Logger.getLogger(Owner_add_houses.class.getName());
@@ -83,7 +85,20 @@ public class Owner_add_houses {
 	public boolean add(loginpage loginO) throws SQLException {
 		connect con =new connect();
 		con.func();
-		String insert_house="INSERT INTO `houses` ( `name`, `image`, `location`, `available_services`, `price`, `information`) VALUES (?,?,?,?,?,?);";
+		String select_id="SELECT `id` FROM `users` WHERE `type_user`='owner' And `username`=?;";
+		try (PreparedStatement preparedStatement = con.getConnection().prepareStatement(select_id)) {
+            preparedStatement.setString(1, loginO.username);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    this.id_owner = resultSet.getInt("id");
+                }
+            }
+        } 
+	catch (SQLException e) {
+        e.printStackTrace();
+    }
+		String insert_house="INSERT INTO `houses` ( `name`, `image`, `location`, `available_services`, `price`, `information`,id_user) VALUES (?,?,?,?,?,?,?);";
 		
 		
 		add = false;
@@ -98,6 +113,7 @@ public class Owner_add_houses {
 				statement.setString(4, this.available_services_House);
 				statement.setInt(5, this.price_House);
 				statement.setString(6, this.information_contact);
+				statement.setInt(7, this.id_owner);
 				statement.executeUpdate();
 				this.add=true;
 			} catch (SQLException e) {

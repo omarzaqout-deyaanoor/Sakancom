@@ -1,7 +1,9 @@
 package classes;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -9,9 +11,9 @@ import conn.connect;
 
 public class tenant_add_furniture{
 	protected String name;
-	protected String name_tenant;
+	protected int id_tenants;
 	protected int price;
-	private static final Logger logger = Logger.getLogger(Owner_add_houses.class.getName());
+	private static final Logger logger = Logger.getLogger(tenant_add_furniture.class.getName());
 	protected boolean add_f;
 	
 	
@@ -19,18 +21,38 @@ public class tenant_add_furniture{
 		this.add_f=false;
 	}
 	
-	public tenant_add_furniture(String name,String name_tenant,int price) {
+	public tenant_add_furniture(String name,int price) {
 		
 		this.name=name;
-		this.name_tenant=name_tenant;
+	
 		this.price=price;
 	}
 	
 	public boolean add_furniture(loginpage login) throws SQLException {
 		connect con =new connect();
 		con.func();
-		String insert_furniture="INSERT INTO `furniture` ( `name`,`price`,`num_tenants`) VALUES (?,?,?);";
+		String namee=login.username;
+		String insert_furniture="INSERT INTO `furniture` ( `name`,`price`,`id_tenants`) VALUES (?,?,?);";
+		Statement stmt = con.getConnection().prepareStatement(insert_furniture);
 		
+		String select_id="SELECT `id` FROM `users` WHERE `type_user`='tenant' And `username`=?;";
+		try (PreparedStatement preparedStatement = con.getConnection().prepareStatement(select_id)) {
+            preparedStatement.setString(1, namee);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    this.id_tenants = resultSet.getInt("id");
+                }
+            }
+        } 
+	catch (SQLException e) {
+        e.printStackTrace();
+    }
+		
+	
+
+		
+	
 		
 		//this.add = false;
 		if(login.isLoggedTenant())
@@ -40,7 +62,7 @@ public class tenant_add_furniture{
 				
 				statement.setString(1,this.name);
 				statement.setInt(2, this.price);
-				statement.setString(3, this.name_tenant);
+				statement.setInt(3, this.id_tenants);
 				
 				statement.executeUpdate();
 				this.add_f=true;

@@ -39,7 +39,7 @@ public class Tenant_add_furniture {
 	@Given("i want to adding the furniture")
 	public void i_want_to_adding_the_furniture() {
 	    // Write code here that turns the phrase above into concrete actions
-		tenant_add=new tenant_add_furniture("chi","Ali",390);
+		tenant_add=new tenant_add_furniture("chi",390);
 	}
 
 	@When("adding furniture")
