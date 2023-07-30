@@ -67,10 +67,13 @@ public class Main {
 	//tenant_add_furniture tn=new tenant_add_furniture("bag",200);
 //	tn.add_furniture(login);
 	Control_Panel cn=new Control_Panel();
-	cn.Select_houses(login);
-	cn.count_tanents(89);
-	cn.num_floor(88);
-
+//	cn.Select_houses(login);
+//	cn.count_tanents(89);
+//	cn.num_floor(88);
+//	cn.num_apartment(50);
+	cn.num_details(71);
+	//book_accommodation B=new book_accommodation(89,57,71);
+	//B.insert_book(login);
 	    	
 	
 	     

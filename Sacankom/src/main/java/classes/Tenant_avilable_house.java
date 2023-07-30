@@ -1,5 +1,6 @@
 package classes;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,7 +20,7 @@ public class Tenant_avilable_house {
 	
 	
 	public boolean is_found() throws SQLException {
-		String num_house="SELECT COUNT(*) FROM `houses` WHERE `availability`=1;";
+		String num_house="SELECT COUNT(*) FROM `apartments` WHERE `avilable`=1;";
 		con.func();
 		Statement stmt = con.getConnection().createStatement();
 		ResultSet rs=stmt.executeQuery(num_house);
@@ -37,25 +38,42 @@ public class Tenant_avilable_house {
 	}
 	
 	public void Select_houses(loginpage login) throws SQLException{
-		String select_house="SELECT `id`, `name`, `image`, `location`, `available_services`, `price`, `information` FROM `houses` WHERE `availability`=1;";
+		String select_house="SELECT `name`, `image`, `location`, `available_services`, `price` FROM `houses` WHERE `id`=?;";
+		String select_apart_avalabel="SELECT `id_apartment`, `id_floor`, `id_house` FROM `apartments` WHERE`avilable`='1';";
 		con.func();
 		
 		try(Statement stmt = con.getConnection().createStatement()) {
 			if(login.isLoggedTenant()) {
 			
-			ResultSet rs=stmt.executeQuery(select_house);
+			ResultSet rs=stmt.executeQuery(select_apart_avalabel);
 			if(this.is_found()) {
 			while(rs.next()){
-				int id_house = rs.getInt("id");
-				 String name = rs.getString("name");
-				 String image = rs.getString("image");
-				 String location = rs.getString("location");
-				 String available_services = rs.getString("available_services");
-			     int price = rs.getInt("price");
-			     String information = rs.getString("information");
-			        logger.log(Level.INFO,id_house + ", " + name + ", " + image +
-	                           ", " + location + ", " + available_services+"," + price + ", " + information);
+				int id_apartment = rs.getInt("id_apartment");
+				int id_floor = rs.getInt("id_floor");
+				int id_house = rs.getInt("id_house");
+				
+				
+			   
 			       
+			        try (PreparedStatement preparedStatement = con.getConnection().prepareStatement(select_house)) {
+			            preparedStatement.setInt(1,id_house);
+
+			            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+			                if (resultSet.next()) {
+			                	String name = resultSet.getString("name");
+			                	 String image = resultSet.getString("image");
+			    				 String location = resultSet.getString("location");
+			    				 String available_services = resultSet.getString("available_services");
+			    			     int price = resultSet.getInt("price");
+
+			    			     logger.log(Level.INFO,id_house + ", " +name+ ", "+id_floor + ", " + id_apartment +
+				                           ", " + location + ", " + available_services+"," + price + ", ");
+			                }
+			            }
+			        } 
+				catch (SQLException e) {
+			        e.printStackTrace();
+			    }
 					}
 				}
 			else {
