@@ -35,8 +35,8 @@ public class Main {
 	//	String pass=scan.next();
 	
 /////		
-//		
-	loginpage login=new loginpage("omar","321");
+//
+	loginpage login=new loginpage("deyaa","123");
 	//login.validateCredentials("ali","123456");
 ///		//login.login("deyaa", "123");
 //		
@@ -58,7 +58,7 @@ public class Main {
 	//Tenant_avilable_house t=new Tenant_avilable_house();
 	//System.out.println(t.is_found());
 	//t.Select_houses(login);
-	login.validateCredentials("omar", "321");
+	login.validateCredentials("deyaa", "123");
 	/*int bath[]= {1,1,3,4,2};
 	int bed[]= {2,3,2,2,2,2};
 	boolean bal[]= {true,true,true,true};
@@ -66,21 +66,23 @@ public class Main {
 	dashe.add(login);*/
 	//tenant_add_furniture tn=new tenant_add_furniture("bag",200);
 //	tn.add_furniture(login);
-	Control_Panel cn=new Control_Panel();
+//	Control_Panel cn=new Control_Panel();
 //	cn.Select_houses(login);
 //	cn.count_tanents(89);
 //	cn.num_floor(88);
 //	cn.num_apartment(50);
-	cn.num_details(71);
+	//cn.num_details(71);
 	//book_accommodation B=new book_accommodation(89,57,71);
 	//B.insert_book(login);
-	    	
+	//tenant_control_panel t=new tenant_control_panel();
+	//t.personal_data(login);
 	
-	     
+//	Tenant_avilable_house w=new Tenant_avilable_house();   
 		
-	     
+//	  w.Select_houses(login);   
 		
-		
+	admin_watching_res w=new admin_watching_res();
+	w.watching(login);
 		
 	}
 

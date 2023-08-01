@@ -20,7 +20,10 @@ public class book_accommodation {
 	protected boolean found;
 	protected int tenant_id;
 	protected int count_apart;
-	
+	protected int avilable;
+	protected String university_majors;
+	protected String ages;
+
 	
 	public book_accommodation() {
 		this.booking=false;
@@ -62,6 +65,7 @@ public class book_accommodation {
 	public void insert_book(loginpage login) throws SQLException{
 		
 		con.func();
+		String is_S="SELECT `id_user` FROM `student` WHERE `id_user`=?;";
 		String select_id="SELECT `id` FROM `users` WHERE `type_user`='tenant' And `username`=?;";
 		try (PreparedStatement preparedStatement = con.getConnection().prepareStatement(select_id)) {
             preparedStatement.setString(1, login.username);
@@ -72,9 +76,9 @@ public class book_accommodation {
                 }
             }
         } 
-	catch (SQLException e) {
-        e.printStackTrace();
-    }
+		
+		
+	
 String insert_house="INSERT INTO `tanents` ( `id_user`, `id_house`, `id_floor`, `id_apart`) VALUES (?,?,?,?);";
 		
 		
@@ -89,7 +93,7 @@ String insert_house="INSERT INTO `tanents` ( `id_user`, `id_house`, `id_floor`, 
 				statement.setInt(3,this.id_floor);
 				statement.setInt(4,this.id_apart);
 				statement.executeUpdate();
-				this.booking=true;
+				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -100,7 +104,45 @@ String insert_house="INSERT INTO `tanents` ( `id_user`, `id_house`, `id_floor`, 
 			logger.log(Level.INFO,"the tenant not loggin");
 		}
 			
-			
+		
+		String upd="UPDATE `apartments` SET`avilable`='0' WHERE `id_apartment`=?;";
+		String upd2="UPDATE `apartments` SET`avilable`='1' WHERE `id_apartment`=?;";
+		String st="SELECT `ages`,`university majors` FROM `student` WHERE `id_user`=?";
+		 try (PreparedStatement preparedStatement3 = con.getConnection().prepareStatement(is_S)) {
+	            preparedStatement3.setInt(1,this.tenant_id);
+
+	            try (ResultSet resultSet3 = preparedStatement3.executeQuery()) {
+	           //
+	                if (resultSet3.next()) {
+	                	try (PreparedStatement preparedStatement = con.getConnection().prepareStatement(st)) {
+	                        preparedStatement.setInt(1,this.tenant_id);
+
+	                        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+	                            if (resultSet.next()) {
+	                                this.ages = resultSet.getString("ages");
+	                                this.university_majors = resultSet.getString("university majors");
+	                                logger.log(Level.INFO,"ages"+" "+this.ages+" "+"university majors"+" "+this.university_majors);
+	                            }
+	                        }
+	                	}
+try(PreparedStatement statement = con.getConnection().prepareStatement(upd2)) {
+	        				
+	        				statement.setInt(1,this.id_apart);
+	        				statement.executeUpdate();
+	                	}
+	                	
+	                }
+	                else {
+	                	try(PreparedStatement statement = con.getConnection().prepareStatement(upd)) {
+	        				
+	        				statement.setInt(1,this.id_apart);
+	        				statement.executeUpdate();
+	                	
+	                	}	
+	                }
+	                }
+	                }
+		 this.booking=true;
 		}
 public boolean Booking() {
 		
