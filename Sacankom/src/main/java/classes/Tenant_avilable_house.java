@@ -55,7 +55,7 @@ public class Tenant_avilable_house {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     this.tenant_id = resultSet.getInt("id");
-                    logger.log(Level.INFO,this.tenant_id +"######################");
+                  //  logger.log(Level.INFO,this.tenant_id +"######################");
                 }
             }
         } 
@@ -71,7 +71,7 @@ public class Tenant_avilable_house {
 	                //    logger.log(Level.INFO,resultSet3+"ddddddddddddd");
 
 	                	 this.ccc = resultSet3.getInt("id_user");
-	                	 logger.log(Level.INFO,this.ccc +"eeeeeeeeeeeeeee");
+	                	// logger.log(Level.INFO,this.ccc +"eeeeeeeeeeeeeee");
 	    		  
 //student
 	                	
@@ -79,7 +79,7 @@ public class Tenant_avilable_house {
 			if(login.isLoggedTenant()) {
 			
 			ResultSet rs=stmt.executeQuery(select_apart_avalabel);
-			if(this.is_found()) {
+		
 			while(rs.next()){
 				int id_apartment = rs.getInt("id_apartment");
 				int id_floor = rs.getInt("id_floor");
@@ -108,11 +108,7 @@ public class Tenant_avilable_house {
 			        e.printStackTrace();
 			    }
 					}
-				}
-			else {
-				  logger.log(Level.INFO,"doesnt found any houses avilable ");
-				  
-				}		
+					
 			}
 			else {
 				logger.log(Level.INFO,"the Tenant is doesnt login");
@@ -129,7 +125,7 @@ public class Tenant_avilable_house {
 	            			if(login.isLoggedTenant()) {
 	            			
 	            			ResultSet rs=stmt.executeQuery(select_apart_avalabel1);
-	            			if(this.is_found()) {
+	            			
 	            			while(rs.next()){
 	            				int id_apartment = rs.getInt("id_apartment");
 	            				int id_floor = rs.getInt("id_floor");
@@ -159,11 +155,8 @@ public class Tenant_avilable_house {
 	            			    }
 	            					}
 	            				}
-	            			else {
-	            				  logger.log(Level.INFO,"doesnt found any houses avilable ");
-	            				  
-	            				}		
-	            			}
+	            					
+	            			
 	            			else {
 	            				logger.log(Level.INFO,"the Tenant is doesnt login");
 	            			}

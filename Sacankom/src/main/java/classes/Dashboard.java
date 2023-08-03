@@ -13,6 +13,7 @@ public class Dashboard{
 	protected int id_House;	
 	protected int num_floor;
 	protected int num_apartment;
+	protected int is_student;
 	protected int num_bathroom[];
 	protected int num_bedroom[];
 	protected boolean balcony[];
@@ -34,9 +35,9 @@ public class Dashboard{
 
 
 
-	public Dashboard(int id_House, int num_floor, int num_apartment,
+	public Dashboard(int id_House, int num_floor, int num_apartment,int is_student,
 			 int bath[],int bed[],boolean balcony[]) {
-		
+		this.is_student=is_student;
 		this.id_House = id_House;
 		this.num_floor = num_floor;
 		this.num_apartment = num_apartment;
@@ -61,6 +62,13 @@ public class Dashboard{
 		adding = false;
 		
 		if(loginO.isLoggedOwner()) {
+			
+			String st="SELECT `id`FROM `houses` WHERE `isAccept`=1 And `id`=?;";
+			try(PreparedStatement statement1 = con.getConnection().prepareStatement(st)) {
+				statement1.setInt(1,this.id_House);
+                ResultSet resultSet1 = statement1.executeQuery();
+               if (resultSet1.next()) {
+            	   
 		for(int i=1;i<=num_floor;i++) {
 			
 			String insert_floor="INSERT INTO `floor`(`num_floor`,`id_house`,`num_apart`) VALUES (?,?,?);";
@@ -77,9 +85,9 @@ public class Dashboard{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			for(int j=1;j<=num_apart;j++) {
+			for(int j=0;j<num_apart;j++) {
 				
-				String insert_apartment="INSERT INTO `apartments`( `id_house`,`id_floor`,`num_bathroom`,`num_bedroom`,`balcony`) VALUES (?,?,?,?,?);";
+				String insert_apartment="INSERT INTO `apartments`( `id_house`,`id_floor`,`num_bathroom`,`num_bedroom`,`balcony`,`for_student`) VALUES (?,?,?,?,?,?);";
 				String max_floor="SELECT MAX(id_floor) FROM `floor`;";
 				logger.log(Level.INFO,"the owner loggin");
 				try(PreparedStatement statement = con.getConnection().prepareStatement(insert_apartment)) {
@@ -87,13 +95,14 @@ public class Dashboard{
 	                if (resultSet.next()) {
 	                    x = resultSet.getInt(1);
 	                  //  x++;
-	                    logger.info("X="+x);
+	                    //logger.info("X="+x);
 	                }
 					statement.setInt(1, this.id_House);
 					statement.setInt(2, x);
 					statement.setInt(3, this.num_bathroom[j]);
 					statement.setInt(4, this.num_bedroom[j]);
 					statement.setBoolean(5, this.balcony[j]);
+					statement.setInt(6, this.is_student);
 
 					statement.executeUpdate();
 					
@@ -106,9 +115,9 @@ public class Dashboard{
 				
 			}
 		}
-		
+               }
 		}
-		
+		}
 		
 		else
 		{

@@ -33,7 +33,7 @@ public void watching(loginpage login) throws SQLException {
 		if(login.isLoggedAdmin()) {
 		this.watch=false;
 		ResultSet rs=stmt.executeQuery(select_watch);
-		if(rs.next()) {
+		
 		while(rs.next()){
 			
 			 String username = rs.getString("username");
@@ -44,11 +44,8 @@ public void watching(loginpage login) throws SQLException {
                            "  " + "apart" +id_apart+ "  ");
 		        this.watch=true;
 		}
-		}
-		else {
-			  logger.log(Level.INFO,"doesnt request");
-			  this.watch=false;
-		}
+		
+		
 	}
 		else {
 			logger.log(Level.INFO,"the admin is doesnt login");

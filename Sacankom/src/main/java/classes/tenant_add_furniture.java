@@ -24,8 +24,8 @@ public class tenant_add_furniture{
 	public tenant_add_furniture(String name,int price) {
 		
 		this.name=name;
-	
 		this.price=price;
+		
 	}
 	
 	public boolean add_furniture(loginpage login) throws SQLException {

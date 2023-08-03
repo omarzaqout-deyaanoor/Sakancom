@@ -41,7 +41,7 @@ public void i_want_to_add() {
 	int bath[]= {1,1,3,4,2};
 	int bed[]= {2,3,2,2,2,2};
 	boolean bal[]= {true,true,true,true};
-	dash=new Dashboard(89, 2, 2, bath, bed, bal);
+	dash=new Dashboard(89, 2, 2,0, bath, bed, bal);
 	
 }
 
@@ -71,7 +71,7 @@ public void i_want_to_adding_the_floor_and_apartments() {
 	int bath[]= {1,1,3,4,2};
 	int bed[]= {2,3,2,2,2,2};
 	boolean bal[]= {true,true,true,true};
-	dash=new Dashboard(88, 2, 1, bath, bed, bal);
+	dash=new Dashboard(88, 2, 1,1, bath, bed, bal);
 	
 }
 

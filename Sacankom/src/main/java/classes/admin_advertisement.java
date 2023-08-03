@@ -30,7 +30,7 @@ public class admin_advertisement {
 			if(login.isLoggedAdmin()) {
 			has_find=false;
 			ResultSet rs=stmt.executeQuery(select_house);
-			if(rs.next()) {
+			
 			while(rs.next()){
 				int id_house = rs.getInt("id");
 				 String name = rs.getString("name");
@@ -43,11 +43,8 @@ public class admin_advertisement {
 	                           ", " + location + ", " + available_services+"," + price + ", " + information);
 			        has_find=true;
 			}
-			}
-			else {
-				  logger.log(Level.INFO,"doesnt request");
-				  has_find=false;
-			}
+			
+			
 		}
 			else {
 				logger.log(Level.INFO,"the admin is doesnt login");
