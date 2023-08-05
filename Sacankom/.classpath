@@ -43,6 +43,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/mysql-connector-java-8.0.11.jar"/>
-	<classpathentry kind="lib" path="C:/Users/HP/Downloads/mysql-connector-java-8.0.11.jar"/>
+	<classpathentry kind="lib" path="mysql-connector-java-8.0.11.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
